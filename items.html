@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物品百科 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wiki-toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+        .wiki-search {
+            flex: 1; min-width: 220px; padding: 12px 18px; font-size: 1rem;
+            border: 2px solid var(--mc-border); border-radius: 8px; outline: none;
+            transition: border-color 0.2s;
+        }
+        .wiki-search:focus { border-color: var(--mc-green); }
+        .type-filter { display: flex; gap: 6px; flex-wrap: wrap; }
+        .type-btn {
+            padding: 8px 16px; border: 2px solid var(--mc-border); border-radius: 20px;
+            background: #fff; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: all 0.2s; font-family: inherit;
+        }
+        .type-btn:hover { border-color: var(--mc-green); color: var(--mc-green-dark); }
+        .type-btn.active { background: var(--mc-green); color: #fff; border-color: var(--mc-green); }
+        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+        .item-card {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 10px;
+            padding: 18px 16px; text-align: center; cursor: pointer; box-shadow: var(--mc-shadow);
+            transition: all 0.15s;
+        }
+        .item-card:hover { transform: translateY(-3px); border-color: var(--mc-green); }
+        .item-card .i-icon { font-size: 2.4rem; display: block; margin-bottom: 8px; }
+        .item-card .i-name { font-weight: 700; font-size: 0.95rem; }
+        .item-card .i-type { display: inline-block; margin-top: 6px; font-size: 0.72rem; color: var(--mc-green-dark); background: #eaf6ea; padding: 2px 10px; border-radius: 10px; }
+        .item-count { color: var(--mc-text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+
+        /* 详情弹窗 */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: #fff; border-radius: 12px; max-width: 460px; width: 100%;
+            padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto;
+        }
+        .modal .m-icon { font-size: 3rem; text-align: center; display: block; margin-bottom: 8px; }
+        .modal h3 { text-align: center; font-size: 1.3rem; margin-bottom: 4px; }
+        .modal .m-type { text-align: center; font-size: 0.8rem; color: var(--mc-green-dark); background: #eaf6ea; display: inline-block; padding: 3px 12px; border-radius: 12px; margin: 0 auto 16px; }
+        .modal .m-row { margin-bottom: 12px; }
+        .modal .m-label { font-weight: 700; color: var(--mc-green-dark); font-size: 0.85rem; margin-bottom: 3px; }
+        .modal .m-val { font-size: 0.92rem; line-height: 1.6; }
+        .modal-close {
+            display: block; margin: 20px auto 0; background: var(--mc-green); color: #fff;
+            border: none; padding: 10px 32px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+        }
+        .modal-close:hover { background: var(--mc-green-dark); }
+        .empty-tip { text-align: center; color: var(--mc-text-dim); padding: 40px 0; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="wiki.html">百科首页</a></li>
+                <li><a href="items.html" class="active">物品百科</a></li>
+                <li><a href="recipes.html">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🔍 物品百科</h1>
+            <p class="page-desc">搜索或按分类浏览物品，点击查看详情。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="wiki-toolbar">
+                <input type="text" class="wiki-search" id="search-input" placeholder="搜索物品名称，如：钻石、铁剑、苹果..." oninput="renderItems()">
+                <div class="type-filter" id="type-filter"></div>
+            </div>
+            <div class="item-count" id="item-count"></div>
+            <div class="item-grid" id="item-grid"></div>
+            <div class="empty-tip" id="empty-tip" style="display:none;">😅 没有找到匹配的物品，换个关键词试试？</div>
+        </div>
+    </section>
+
+    <!-- 详情弹窗 -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" id="modal" onclick="event.stopPropagation()">
+            <span class="m-icon" id="m-icon"></span>
+            <h3 id="m-name"></h3>
+            <div style="text-align:center;"><span class="m-type" id="m-type"></span></div>
+            <div class="m-row"><div class="m-label">📖 介绍</div><div class="m-val" id="m-desc"></div></div>
+            <div class="m-row"><div class="m-label">🏭 获取方式</div><div class="m-val" id="m-source"></div></div>
+            <div class="m-row"><div class="m-label">🛠️ 用途</div><div class="m-val" id="m-use"></div></div>
+            <button class="modal-close" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+        </div>
+    </footer>
+
+    <script src="data/items.js"></script>
+    <script>
+        let currentType = '全部';
+        let currentItems = window.MC_ITEMS;
+
+        // 渲染分类按钮
+        function renderTypeFilter() {
+            const container = document.getElementById('type-filter');
+            container.innerHTML = window.MC_ITEM_TYPES.map(t =>
+                `<button class="type-btn${t === currentType ? ' active' : ''}" onclick="setType('${t}')">${t}</button>`
+            ).join('');
+        }
+
+        function setType(type) {
+            currentType = type;
+            renderTypeFilter();
+            renderItems();
+        }
+
+        function renderItems() {
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const grid = document.getElementById('item-grid');
+            const count = document.getElementById('item-count');
+            const empty = document.getElementById('empty-tip');
+
+            currentItems = window.MC_ITEMS.filter(item => {
+                const matchType = currentType === '全部' || item.type === currentType;
+                const matchQuery = !query || item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query);
+                return matchType && matchQuery;
+            });
+
+            count.textContent = `共 ${currentItems.length} 个物品`;
+            empty.style.display = currentItems.length === 0 ? 'block' : 'none';
+
+            grid.innerHTML = currentItems.map(item => `
+                <div class="item-card" onclick="showDetail('${item.name}')">
+                    <span class="i-icon">${item.icon}</span>
+                    <div class="i-name">${item.name}</div>
+                    <span class="i-type">${item.type}</span>
+                </div>
+            `).join('');
+        }
+
+        function showDetail(name) {
+            const item = window.MC_ITEMS.find(i => i.name === name);
+            if (!item) return;
+            document.getElementById('m-icon').textContent = item.icon;
+            document.getElementById('m-name').textContent = item.name;
+            document.getElementById('m-type').textContent = item.type;
+            document.getElementById('m-desc').textContent = item.desc;
+            document.getElementById('m-source').textContent = item.source;
+            document.getElementById('m-use').textContent = item.use;
+            document.getElementById('modal-overlay').classList.add('show');
+        }
+
+        function closeModal(event) {
+            if (event && event.target.id !== 'modal-overlay') return;
+            document.getElementById('modal-overlay').classList.remove('show');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 支持 URL 参数 ?q=xxx 自动搜索（从百科首页快速搜索跳转）
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const q = params.get('q');
+            if (q) {
+                document.getElementById('search-input').value = q;
+            }
+        })();
+
+        renderTypeFilter();
+        renderItems();
+    </script>
+</body>
+</html>
