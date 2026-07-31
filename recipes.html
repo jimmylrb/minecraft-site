@@ -20,6 +20,9 @@
         }
         .recipe-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
         .recipe-output { font-size: 2rem; }
+        .recipe-output img, .grid-slot img { image-rendering: pixelated; }
+        .recipe-output img { width: 40px; height: 40px; }
+        .grid-slot img { width: 40px; height: 40px; }
         .recipe-head h4 { font-size: 1.05rem; }
         .recipe-desc { font-size: 0.82rem; color: var(--mc-text-dim); line-height: 1.5; }
         .recipe-grid-box {
@@ -80,6 +83,8 @@
     </footer>
 
     <script src="data/recipes.js"></script>
+    <script src="data/item_images.js"></script>
+    <script src="data/recipe_images.js"></script>
     <script>
         function renderRecipes() {
             const query = document.getElementById('search-input').value.trim().toLowerCase();
@@ -92,10 +97,20 @@
 
             empty.style.display = filtered.length === 0 ? 'block' : 'none';
 
-            grid.innerHTML = filtered.map(r => `
+            grid.innerHTML = filtered.map(r => {
+                // 输出图标：优先用贴图（通过物品映射查），否则 emoji
+                const outImg = (window.MC_ITEM_IMAGES || {})[r.output];
+                const outHtml = outImg ? `<img src="${outImg}" alt="${r.output}">` : r.icon;
+                // 格子：emoji → 贴图
+                const cellHtml = (cell) => {
+                    if (!cell) return '<div class="grid-slot empty"></div>';
+                    const img = (window.MC_RECIPE_IMAGES || {})[cell];
+                    return img ? `<div class="grid-slot"><img src="${img}" alt="${cell}"></div>` : `<div class="grid-slot">${cell}</div>`;
+                };
+                return `
                 <div class="recipe-card">
                     <div class="recipe-head">
-                        <span class="recipe-output">${r.icon}</span>
+                        <span class="recipe-output">${outHtml}</span>
                         <div>
                             <h4>${r.output}</h4>
                             <div class="recipe-desc">${r.desc}</div>
@@ -103,12 +118,10 @@
                     </div>
                     <div class="recipe-arrow">⬇️</div>
                     <div class="recipe-grid-box">
-                        ${r.grid.map(row => row.map(cell =>
-                            cell ? `<div class="grid-slot">${cell}</div>` : `<div class="grid-slot empty"></div>`
-                        ).join('')).join('')}
+                        ${r.grid.map(row => row.map(cellHtml).join('')).join('')}
                     </div>
                 </div>
-            `).join('');
+            `;}).join('');
         }
 
         renderRecipes();
