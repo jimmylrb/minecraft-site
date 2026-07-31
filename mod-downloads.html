@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mod 下载 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .md-toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+        .md-search {
+            flex: 1; min-width: 220px; padding: 12px 18px; font-size: 1rem;
+            border: 2px solid var(--mc-border); border-radius: 8px; outline: none;
+        }
+        .md-search:focus { border-color: var(--mc-green); }
+        .md-cat { display: flex; gap: 6px; flex-wrap: wrap; }
+        .md-cat-btn {
+            padding: 8px 16px; border: 2px solid var(--mc-border); border-radius: 20px;
+            background: #fff; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: all 0.2s; font-family: inherit;
+        }
+        .md-cat-btn:hover { border-color: var(--mc-green); color: var(--mc-green-dark); }
+        .md-cat-btn.active { background: var(--mc-green); color: #fff; border-color: var(--mc-green); }
+        .md-list { display: grid; gap: 12px; max-width: 900px; margin: 0 auto; }
+        .md-item {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 10px;
+            padding: 16px 20px; box-shadow: var(--mc-shadow); display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+        }
+        .md-ico { font-size: 1.8rem; flex-shrink: 0; }
+        .md-info { flex: 1; min-width: 220px; }
+        .md-info h4 { font-size: 1rem; margin-bottom: 3px; }
+        .md-info .md-desc { font-size: 0.85rem; color: var(--mc-text-dim); line-height: 1.5; }
+        .md-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+        .md-badge { font-size: 0.7rem; padding: 2px 10px; border-radius: 10px; font-weight: 600; background: #eef2f7; color: #5d6d7e; }
+        .md-badge.cat { background: #eaf6ea; color: var(--mc-green-dark); }
+        .md-btn {
+            display: inline-block; background: var(--mc-green); color: #fff; text-decoration: none;
+            padding: 9px 20px; border-radius: 8px; font-size: 0.88rem; font-weight: 700;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.15); transition: all 0.15s; white-space: nowrap;
+        }
+        .md-btn:hover { background: var(--mc-green-dark); transform: translateY(-2px); }
+        .md-count { color: var(--mc-text-dim); font-size: 0.85rem; margin-bottom: 12px; text-align: center; }
+        .empty-tip { text-align: center; color: var(--mc-text-dim); padding: 40px 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="wiki.html">百科首页</a></li>
+                <li><a href="items.html">物品百科</a></li>
+                <li><a href="recipes.html">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="mod-downloads.html" class="active">Mod 下载</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🧩 Mod 下载中心</h1>
+            <p class="page-desc">60+ 款热门 Mod，可搜索、按分类筛选，一键跳转下载。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="md-toolbar">
+                <input type="text" class="md-search" id="search-input" placeholder="搜索 Mod，如：优化、光影、机械..." oninput="renderMods()">
+                <div class="md-cat" id="cat-filter"></div>
+            </div>
+            <div class="md-count" id="md-count"></div>
+            <div class="md-list" id="md-list"></div>
+            <div class="empty-tip" id="empty-tip" style="display:none;">😅 没有找到相关 Mod，换个关键词试试？</div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">💡 下载说明</h2>
+            <div class="tip-box" style="max-width:860px;">
+                <p>🔗 所有下载链接都指向 <strong>Modrinth</strong>（国际知名开源平台）或官方站点，安全可靠。</p>
+                <p>📥 点击"去下载"后，在项目页面选择你的游戏版本（如 1.20.1）和加载器（Forge/Fabric）下载。</p>
+                <p>🛠️ 安装方法：装好 Forge/Fabric → 把 .jar 放进 <code>mods</code> 文件夹 → 重启游戏。</p>
+                <p>⚠️ 请勿从来路不明的网站下载 Mod，可能携带病毒！</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+            <p class="footer-note">所有 Mod 下载均跳转到 Modrinth 等正规平台，本站不直接托管 Mod 文件。</p>
+        </div>
+    </footer>
+
+    <script src="data/mod_downloads.js"></script>
+    <script>
+        let currentCat = '全部';
+
+        function renderCatFilter() {
+            const container = document.getElementById('cat-filter');
+            container.innerHTML = window.MC_MOD_DL_CATEGORIES.map(c =>
+                `<button class="md-cat-btn${c === currentCat ? ' active' : ''}" onclick="setCat('${c}')">${c}</button>`
+            ).join('');
+        }
+
+        function setCat(cat) {
+            currentCat = cat;
+            renderCatFilter();
+            renderMods();
+        }
+
+        function renderMods() {
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const list = document.getElementById('md-list');
+            const count = document.getElementById('md-count');
+            const empty = document.getElementById('empty-tip');
+
+            const filtered = window.MC_MOD_DOWNLOADS.filter(m => {
+                const matchCat = currentCat === '全部' || m.category === currentCat;
+                const matchQuery = !query ||
+                    m.name.toLowerCase().includes(query) ||
+                    m.desc.toLowerCase().includes(query) ||
+                    m.category.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+
+            count.textContent = `共 ${filtered.length} 款 Mod`;
+            empty.style.display = filtered.length === 0 ? 'block' : 'none';
+
+            list.innerHTML = filtered.map(m => `
+                <div class="md-item">
+                    <span class="md-ico">${m.icon}</span>
+                    <div class="md-info">
+                        <h4>${m.name}</h4>
+                        <div class="md-desc">${m.desc}</div>
+                        <div class="md-meta">
+                            <span class="md-badge cat">${m.category}</span>
+                            <span class="md-badge">${m.loader}</span>
+                            <span class="md-badge">MC ${m.version}</span>
+                        </div>
+                    </div>
+                    <a class="md-btn" href="${m.downloadUrl}" target="_blank" rel="noopener">⬇️ 去下载</a>
+                </div>
+            `).join('');
+        }
+
+        renderCatFilter();
+        renderMods();
+    </script>
+</body>
+</html>
