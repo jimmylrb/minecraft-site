@@ -6,6 +6,24 @@
     <title>资源下载 — 方块大陆</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .dl-source { font-size: 0.78rem; color: var(--mc-text-dim); margin-top: 6px; }
+        .dl-link-btn {
+            display: inline-block; margin-top: 12px; background: var(--mc-green); color: #fff;
+            border: none; padding: 9px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 700;
+            cursor: pointer; text-decoration: none; box-shadow: 0 3px 0 rgba(0,0,0,0.15); transition: all 0.15s;
+        }
+        .dl-link-btn:hover { background: var(--mc-green-dark); transform: translateY(-2px); }
+        .platform-banner {
+            display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px;
+        }
+        .platform-link {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 10px; padding: 12px 22px;
+            text-decoration: none; color: var(--mc-text); box-shadow: var(--mc-shadow); transition: all 0.15s;
+            display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.9rem;
+        }
+        .platform-link:hover { border-color: var(--mc-green); transform: translateY(-2px); }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -13,9 +31,6 @@
             <a href="index.html" class="logo">⛏️ 方块大陆</a>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
-                <li><a href="beginner.html">新手入门</a></li>
-                <li><a href="guides.html">攻略教程</a></li>
-                <li><a href="mods.html">Mod 分享</a></li>
                 <li><a href="wiki.html">百科首页</a></li>
                 <li><a href="items.html">物品百科</a></li>
                 <li><a href="recipes.html">合成配方</a></li>
@@ -31,41 +46,20 @@
     <section class="page-header">
         <div class="container">
             <h1>📦 资源下载</h1>
-            <p class="page-desc">精选皮肤、材质包、地图存档，一站搞定。</p>
+            <p class="page-desc">材质包、皮肤、地图——全部来自正规平台的真实链接。</p>
         </div>
     </section>
 
+    <!-- 推荐平台 -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title">🎨 皮肤下载</h2>
-            <div class="card-grid">
-                <div class="card mc-card dl-card">
-                    <div class="card-icon">🧑‍🚀</div>
-                    <h3>太空宇航员</h3>
-                    <p>酷炫的太空服皮肤，Java 版 64×64 皮肤。</p>
-                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('skin1')">下载</button>
-                    <div class="dl-tip" id="skin1">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
-                </div>
-                <div class="card mc-card dl-card">
-                    <div class="card-icon">🐉</div>
-                    <h3>龙之战士</h3>
-                    <p>中世纪龙鳞铠甲风，战斗玩家的最爱。</p>
-                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('skin2')">下载</button>
-                    <div class="dl-tip" id="skin2">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
-                </div>
-                <div class="card mc-card dl-card">
-                    <div class="card-icon">🐼</div>
-                    <h3>熊猫乐园</h3>
-                    <p>憨态可掬的熊猫套装，可爱系玩家的选择。</p>
-                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('skin3')">下载</button>
-                    <div class="dl-tip" id="skin3">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
-                </div>
-            </div>
-            <div class="tip-box">
-                💡 <strong>皮肤怎么用？</strong>Java 版：在 minecraft.net 个人中心上传皮肤（正版）。离线/服务器：使用皮肤站（如 LittleSkin）或皮肤 Mod。
+            <h2 class="section-title">⭐ 推荐资源平台</h2>
+            <p style="text-align:center;color:var(--mc-text-dim);font-size:0.9rem;margin-bottom:20px;">以下平台经过验证可用，资源最全、最安全：</p>
+            <div class="platform-banner">
+                <a class="platform-link" href="https://modrinth.com/" target="_blank" rel="noopener">🧩 Modrinth<span style="font-size:0.75rem;color:var(--mc-text-dim);">Mod/材质/光影/整合包</span></a>
+                <a class="platform-link" href="https://faithful.team/" target="_blank" rel="noopener">🎨 Faithful 官网<span style="font-size:0.75rem;color:var(--mc-text-dim);">高清材质包</span></a>
+                <a class="platform-link" href="https://littleskin.cn/" target="_blank" rel="noopener">🎭 LittleSkin<span style="font-size:0.75rem;color:var(--mc-text-dim);">公益皮肤站</span></a>
+                <a class="platform-link" href="https://www.curseforge.com/minecraft" target="_blank" rel="noopener">📦 CurseForge<span style="font-size:0.75rem;color:var(--mc-text-dim);">国际老牌平台</span></a>
             </div>
         </div>
     </section>
@@ -77,65 +71,87 @@
                 <div class="card mc-card dl-card">
                     <div class="card-icon">🖌️</div>
                     <h3>Faithful 高清原版</h3>
-                    <p>原版风格的高清重绘（32×/64×/128×），画面更细腻。</p>
+                    <p>原版风格的高清重绘（32×/64×/128×），画面更细腻。官方唯一下载来源。</p>
                     <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('pack1')">下载</button>
-                    <div class="dl-tip" id="pack1">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                    <div class="dl-source">🔗 来源：faithful.team（官方站，已验证）</div>
+                    <a class="dl-link-btn" href="https://faithful.team/downloads/" target="_blank" rel="noopener">去下载</a>
                 </div>
                 <div class="card mc-card dl-card">
                     <div class="card-icon">🏰</div>
                     <h3>John Smith 中世纪</h3>
                     <p>复古中世纪质感，搭配城堡建筑效果拔群。</p>
                     <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('pack2')">下载</button>
-                    <div class="dl-tip" id="pack2">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                    <div class="dl-source">🔗 来源：CurseForge 官方条目</div>
+                    <a class="dl-link-btn" href="https://www.curseforge.com/minecraft/texture-packs/john-smith-legacy" target="_blank" rel="noopener">去下载</a>
                 </div>
                 <div class="card mc-card dl-card">
                     <div class="card-icon">🌊</div>
                     <h3>Soartex 清新卡通</h3>
                     <p>色彩明快的卡通风格，适合低龄玩家和建筑党。</p>
                     <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('pack3')">下载</button>
-                    <div class="dl-tip" id="pack3">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                    <div class="dl-source">🔗 来源：CurseForge 官方条目</div>
+                    <a class="dl-link-btn" href="https://www.curseforge.com/minecraft/texture-packs/soartex-fanver" target="_blank" rel="noopener">去下载</a>
                 </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>更多材质包：</strong>也可以到 <strong>Modrinth</strong>（<code>modrinth.com/resourcepacks</code>）或 <strong>CurseForge</strong> 搜索其他材质包，那里有成千上万的选择。
             </div>
         </div>
     </section>
 
     <section class="section">
         <div class="container">
-            <h2 class="section-title">🗺️ 地图存档下载</h2>
+            <h2 class="section-title">🎭 皮肤下载</h2>
             <div class="card-grid">
                 <div class="card mc-card dl-card">
-                    <div class="card-icon">🏔️</div>
-                    <h3>雪山生存地图</h3>
-                    <p>出生在雪山之巅，资源匮乏的高难度生存挑战。</p>
-                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('map1')">下载</button>
-                    <div class="dl-tip" id="map1">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
+                    <div class="card-icon">🧑‍🚀</div>
+                    <h3>LittleSkin 皮肤站</h3>
+                    <p>中国知名公益皮肤站，海量皮肤库，支持离线/外置登录使用。</p>
+                    <div class="dl-meta">📦 Java 版 · 免费 · 国内访问快</div>
+                    <div class="dl-source">🔗 来源：littleskin.cn（已验证）</div>
+                    <a class="dl-link-btn" href="https://littleskin.cn/skinlib" target="_blank" rel="noopener">浏览皮肤库</a>
                 </div>
                 <div class="card mc-card dl-card">
-                    <div class="card-icon">🏰</div>
-                    <h3>中世纪城堡地图</h3>
-                    <p>完整的中世纪小镇+城堡，适合建筑参考或冒险探索。</p>
-                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('map2')">下载</button>
-                    <div class="dl-tip" id="map2">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
-                </div>
-                <div class="card mc-card dl-card">
-                    <div class="card-icon">🕹️</div>
-                    <h3>跑酷挑战地图</h3>
-                    <p>100 关跑酷关卡，从易到难，手残党慎入 😎。</p>
-                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
-                    <button class="btn btn-sm" onclick="showTip('map3')">下载</button>
-                    <div class="dl-tip" id="map3">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
+                    <div class="card-icon">🛡️</div>
+                    <h3>官方皮肤上传</h3>
+                    <p>正版玩家可以直接在 Minecraft 官网个人中心上传自己的皮肤。</p>
+                    <div class="dl-meta">📦 仅限正版 Java 版</div>
+                    <div class="dl-source">🔗 来源：minecraft.net 官方</div>
+                    <a class="dl-link-btn" href="https://www.minecraft.net/msaprofile/mygames/editskin" target="_blank" rel="noopener">去上传</a>
                 </div>
             </div>
             <div class="tip-box">
-                💡 <strong>地图怎么安装？</strong>把下载的 .zip 解压后，放进 <code>.minecraft/saves</code> 文件夹（Java 版）。基岩版放在世界的导入目录。
+                💡 <strong>皮肤怎么用？</strong>正版：官网个人中心上传。离线/服务器：注册 LittleSkin 账号，按其教程配置外置登录即可。
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">🗺️ 地图存档</h2>
+            <div class="card-grid">
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🏔️</div>
+                    <h3>Modrinth 搜索地图</h3>
+                    <p>Modrinth 整合包和世界存档丰富，用关键词搜索（如"survival map"）。</p>
+                    <div class="dl-meta">📦 支持 1.16+ · 免费</div>
+                    <div class="dl-source">🔗 来源：modrinth.com（已验证）</div>
+                    <a class="dl-link-btn" href="https://modrinth.com/discover/worlds" target="_blank" rel="noopener">搜索地图</a>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🌄</div>
+                    <h3>Planet Minecraft</h3>
+                    <p>全球最大的玩家作品分享站，海量地图、建筑、皮肤存档。</p>
+                    <div class="dl-meta">📦 跨版本 · 免费</div>
+                    <div class="dl-source">🔗 来源：planetminecraft.com（国际站）</div>
+                    <a class="dl-link-btn" href="https://www.planetminecraft.com/" target="_blank" rel="noopener">去浏览</a>
+                </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>地图怎么安装？</strong>把下载的 .zip 解压后放进 <code>.minecraft/saves</code> 文件夹（Java 版）。基岩版在世界的导入目录。
             </div>
             <div class="tip-box warn">
-                ⚠️ <strong>安全提醒：</strong>本站所有下载均为示例占位链接。请只下载来源可信的资源，下载文件前先查毒！
+                ⚠️ <strong>安全提醒：</strong>请只从正规平台（Modrinth、CurseForge、Planet Minecraft）下载资源，下载后先查毒再使用！
             </div>
         </div>
     </section>
@@ -144,16 +160,8 @@
         <div class="container">
             <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
             <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+            <p class="footer-note">本站不直接托管游戏资源，所有下载均跳转到官方/正规第三方平台。</p>
         </div>
     </footer>
-
-    <script>
-        function showTip(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.classList.toggle('show');
-            }
-        }
-    </script>
 </body>
 </html>
