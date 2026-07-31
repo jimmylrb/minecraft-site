@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合成配方 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .recipe-toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+        .recipe-search {
+            flex: 1; min-width: 220px; padding: 12px 18px; font-size: 1rem;
+            border: 2px solid var(--mc-border); border-radius: 8px; outline: none;
+        }
+        .recipe-search:focus { border-color: var(--mc-green); }
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .recipe-card {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 10px;
+            padding: 20px; box-shadow: var(--mc-shadow);
+        }
+        .recipe-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .recipe-output { font-size: 2rem; }
+        .recipe-head h4 { font-size: 1.05rem; }
+        .recipe-desc { font-size: 0.82rem; color: var(--mc-text-dim); line-height: 1.5; }
+        .recipe-grid-box {
+            display: grid; grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(3, 52px);
+            gap: 4px; background: #e8e2d4; border: 2px solid #d5cdb8; border-radius: 8px; padding: 6px;
+            width: max-content; margin: 0 auto 6px;
+        }
+        .grid-slot {
+            background: #f5f2ea; border: 1px solid #ddd5c2; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+        }
+        .grid-slot.empty { background: transparent; border-color: transparent; }
+        .recipe-arrow { text-align: center; font-size: 1.4rem; margin: 4px 0; }
+        .recipe-result { text-align: center; font-size: 2rem; }
+        .empty-tip { text-align: center; color: var(--mc-text-dim); padding: 40px 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="wiki.html">百科首页</a></li>
+                <li><a href="items.html">物品百科</a></li>
+                <li><a href="recipes.html" class="active">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🧪 合成配方</h1>
+            <p class="page-desc">可视化 3×3 合成表，搜索物品查看配方。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="recipe-toolbar">
+                <input type="text" class="recipe-search" id="search-input" placeholder="搜索配方，如：镐、剑、熔炉..." oninput="renderRecipes()">
+            </div>
+            <div class="recipe-grid" id="recipe-grid"></div>
+            <div class="empty-tip" id="empty-tip" style="display:none;">😅 没有找到这个配方。</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+        </div>
+    </footer>
+
+    <script src="data/recipes.js"></script>
+    <script>
+        function renderRecipes() {
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const grid = document.getElementById('recipe-grid');
+            const empty = document.getElementById('empty-tip');
+
+            const filtered = window.MC_RECIPES.filter(r =>
+                !query || r.output.toLowerCase().includes(query) || r.desc.toLowerCase().includes(query)
+            );
+
+            empty.style.display = filtered.length === 0 ? 'block' : 'none';
+
+            grid.innerHTML = filtered.map(r => `
+                <div class="recipe-card">
+                    <div class="recipe-head">
+                        <span class="recipe-output">${r.icon}</span>
+                        <div>
+                            <h4>${r.output}</h4>
+                            <div class="recipe-desc">${r.desc}</div>
+                        </div>
+                    </div>
+                    <div class="recipe-arrow">⬇️</div>
+                    <div class="recipe-grid-box">
+                        ${r.grid.map(row => row.map(cell =>
+                            cell ? `<div class="grid-slot">${cell}</div>` : `<div class="grid-slot empty"></div>`
+                        ).join('')).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderRecipes();
+    </script>
+</body>
+</html>
