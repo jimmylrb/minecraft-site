@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>附魔与药水 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ench-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+        .ench-tab {
+            padding: 10px 26px; border: 2px solid var(--mc-border); border-radius: 20px;
+            background: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700;
+            transition: all 0.2s; font-family: inherit;
+        }
+        .ench-tab:hover { border-color: var(--mc-green); }
+        .ench-tab.active { background: var(--mc-green); color: #fff; border-color: var(--mc-green); }
+        .ench-search {
+            flex: 1; min-width: 200px; padding: 10px 16px; font-size: 0.95rem;
+            border: 2px solid var(--mc-border); border-radius: 20px; outline: none;
+        }
+        .ench-search:focus { border-color: var(--mc-green); }
+        .ench-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+        .ench-card {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 10px;
+            padding: 16px 18px; box-shadow: var(--mc-shadow); display: flex; gap: 14px; align-items: flex-start;
+        }
+        .ench-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .ench-info h4 { font-size: 0.98rem; margin-bottom: 2px; }
+        .ench-meta { font-size: 0.75rem; color: var(--mc-green-dark); margin-bottom: 5px; }
+        .ench-info p { font-size: 0.85rem; color: var(--mc-text-dim); line-height: 1.5; }
+        .ench-count { color: var(--mc-text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+        .empty-tip { text-align: center; color: var(--mc-text-dim); padding: 40px 0; }
+        .max-level { display: inline-block; background: var(--mc-gold); color: #5c4500; font-size: 0.7rem; padding: 1px 8px; border-radius: 8px; font-weight: 700; margin-left: 6px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="wiki.html">百科首页</a></li>
+                <li><a href="items.html">物品百科</a></li>
+                <li><a href="recipes.html">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html" class="active">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>✨ 附魔与药水</h1>
+            <p class="page-desc">查询附魔效果和药水配方，让你更强大。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="ench-toolbar">
+                <button class="ench-tab active" onclick="switchTab('enchant')">✨ 附魔</button>
+                <button class="ench-tab" onclick="switchTab('potion')">⚗️ 药水</button>
+                <input type="text" class="ench-search" id="search-input" placeholder="搜索附魔/药水..." oninput="renderCurrent()">
+            </div>
+            <div class="ench-count" id="ench-count"></div>
+            <div class="ench-grid" id="ench-grid"></div>
+            <div class="empty-tip" id="empty-tip" style="display:none;">😅 没有找到相关内容。</div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">💡 附魔小贴士</h2>
+            <div class="tip-box" style="max-width:860px;">
+                <p>📖 <strong>经验修补</strong>是最好用的附魔：拿着附魔装备吃经验就会自动修复耐久，相当于"永动机"。</p>
+                <p>🔮 <strong>附魔等级</strong>：附魔台周围摆放书架（最高 15 个）能解锁最高等级附魔。</p>
+                <p>⚗️ <strong>药水酿造</strong>：先用地狱疣酿造粗制药水，再加入材料；喷溅药水加火药，滞留药水加龙息。</p>
+                <p>✨ <strong>冲突附魔</strong>：锋利/亡灵杀手/节肢杀手互斥，保护/火焰保护/爆炸保护/弹射物保护互斥。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+        </div>
+    </footer>
+
+    <script src="data/enchants.js"></script>
+    <script>
+        let currentTab = 'enchant';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.ench-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.ench-tab').forEach(b => {
+                if ((tab === 'enchant' && b.textContent.includes('附魔')) || (tab === 'potion' && b.textContent.includes('药水'))) {
+                    b.classList.add('active');
+                }
+            });
+            renderCurrent();
+        }
+
+        function renderCurrent() {
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            const grid = document.getElementById('ench-grid');
+            const count = document.getElementById('ench-count');
+            const empty = document.getElementById('empty-tip');
+
+            if (currentTab === 'enchant') {
+                const filtered = window.MC_ENCHANTMENTS.filter(e =>
+                    !query || e.name.toLowerCase().includes(query) || e.desc.toLowerCase().includes(query)
+                );
+                count.textContent = `共 ${filtered.length} 种附魔`;
+                empty.style.display = filtered.length === 0 ? 'block' : 'none';
+                grid.innerHTML = filtered.map(e => `
+                    <div class="ench-card">
+                        <span class="ench-icon">${e.icon}</span>
+                        <div class="ench-info">
+                            <h4>${e.name}<span class="max-level">最高 ${e.maxLevel} 级</span></h4>
+                            <div class="ench-meta">适用：${e.applies}</div>
+                            <p>${e.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                const filtered = window.MC_POTIONS.filter(p =>
+                    !query || p.name.toLowerCase().includes(query) || p.effect.toLowerCase().includes(query)
+                );
+                count.textContent = `共 ${filtered.length} 种药水`;
+                empty.style.display = filtered.length === 0 ? 'block' : 'none';
+                grid.innerHTML = filtered.map(p => `
+                    <div class="ench-card">
+                        <span class="ench-icon">${p.icon}</span>
+                        <div class="ench-info">
+                            <h4>${p.name}</h4>
+                            <div class="ench-meta">效果：${p.effect} · 时长：${p.duration}</div>
+                            <p>🧪 酿造：${p.brew}</p>
+                            <p>${p.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        renderCurrent();
+    </script>
+</body>
+</html>
