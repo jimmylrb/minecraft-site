@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源下载 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="beginner.html">新手入门</a></li>
+                <li><a href="guides.html">攻略教程</a></li>
+                <li><a href="mods.html">Mod 分享</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html" class="active">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📦 资源下载</h1>
+            <p class="page-desc">精选皮肤、材质包、地图存档，一站搞定。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🎨 皮肤下载</h2>
+            <div class="card-grid">
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🧑‍🚀</div>
+                    <h3>太空宇航员</h3>
+                    <p>酷炫的太空服皮肤，Java 版 64×64 皮肤。</p>
+                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('skin1')">下载</button>
+                    <div class="dl-tip" id="skin1">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🐉</div>
+                    <h3>龙之战士</h3>
+                    <p>中世纪龙鳞铠甲风，战斗玩家的最爱。</p>
+                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('skin2')">下载</button>
+                    <div class="dl-tip" id="skin2">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🐼</div>
+                    <h3>熊猫乐园</h3>
+                    <p>憨态可掬的熊猫套装，可爱系玩家的选择。</p>
+                    <div class="dl-meta">📦 支持 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('skin3')">下载</button>
+                    <div class="dl-tip" id="skin3">🔗 示例下载链接：请替换为你的真实皮肤文件地址</div>
+                </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>皮肤怎么用？</strong>Java 版：在 minecraft.net 个人中心上传皮肤（正版）。离线/服务器：使用皮肤站（如 LittleSkin）或皮肤 Mod。
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">🎨 材质包下载</h2>
+            <div class="card-grid">
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🖌️</div>
+                    <h3>Faithful 高清原版</h3>
+                    <p>原版风格的高清重绘（32×/64×/128×），画面更细腻。</p>
+                    <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('pack1')">下载</button>
+                    <div class="dl-tip" id="pack1">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🏰</div>
+                    <h3>John Smith 中世纪</h3>
+                    <p>复古中世纪质感，搭配城堡建筑效果拔群。</p>
+                    <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('pack2')">下载</button>
+                    <div class="dl-tip" id="pack2">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🌊</div>
+                    <h3>Soartex 清新卡通</h3>
+                    <p>色彩明快的卡通风格，适合低龄玩家和建筑党。</p>
+                    <div class="dl-meta">📦 兼容 Java 版 · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('pack3')">下载</button>
+                    <div class="dl-tip" id="pack3">🔗 示例下载链接：请替换为你的真实材质包地址</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🗺️ 地图存档下载</h2>
+            <div class="card-grid">
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🏔️</div>
+                    <h3>雪山生存地图</h3>
+                    <p>出生在雪山之巅，资源匮乏的高难度生存挑战。</p>
+                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('map1')">下载</button>
+                    <div class="dl-tip" id="map1">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🏰</div>
+                    <h3>中世纪城堡地图</h3>
+                    <p>完整的中世纪小镇+城堡，适合建筑参考或冒险探索。</p>
+                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('map2')">下载</button>
+                    <div class="dl-tip" id="map2">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
+                </div>
+                <div class="card mc-card dl-card">
+                    <div class="card-icon">🕹️</div>
+                    <h3>跑酷挑战地图</h3>
+                    <p>100 关跑酷关卡，从易到难，手残党慎入 😎。</p>
+                    <div class="dl-meta">📦 支持 1.20.x · 免费</div>
+                    <button class="btn btn-sm" onclick="showTip('map3')">下载</button>
+                    <div class="dl-tip" id="map3">🔗 示例下载链接：请替换为你的真实地图文件地址</div>
+                </div>
+            </div>
+            <div class="tip-box">
+                💡 <strong>地图怎么安装？</strong>把下载的 .zip 解压后，放进 <code>.minecraft/saves</code> 文件夹（Java 版）。基岩版放在世界的导入目录。
+            </div>
+            <div class="tip-box warn">
+                ⚠️ <strong>安全提醒：</strong>本站所有下载均为示例占位链接。请只下载来源可信的资源，下载文件前先查毒！
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTip(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.toggle('show');
+            }
+        }
+    </script>
+</body>
+</html>
