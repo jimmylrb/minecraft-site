@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百科首页 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="wiki.html" class="active">百科首页</a></li>
+                <li><a href="items.html">物品百科</a></li>
+                <li><a href="recipes.html">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📚 方块大陆百科</h1>
+            <p class="page-desc">物品、配方、生物、附魔、Mod……一站式查询。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="card-grid">
+                <a href="items.html" class="card-link">
+                    <div class="card mc-card">
+                        <div class="card-icon">🔍</div>
+                        <h3>物品百科</h3>
+                        <p>138+ 种物品，按分类浏览、关键词搜索，点击查看详情。</p>
+                        <span class="card-more">去查询 →</span>
+                    </div>
+                </a>
+                <a href="recipes.html" class="card-link">
+                    <div class="card mc-card">
+                        <div class="card-icon">🧪</div>
+                        <h3>合成配方</h3>
+                        <p>可视化 3×3 合成表，工具、武器、红石机器配方一目了然。</p>
+                        <span class="card-more">去查看 →</span>
+                    </div>
+                </a>
+                <a href="mobs.html" class="card-link">
+                    <div class="card mc-card">
+                        <div class="card-icon">👾</div>
+                        <h3>生物图鉴</h3>
+                        <p>50+ 种生物：生命值、掉落物、生成地点，打怪前先查清楚。</p>
+                        <span class="card-more">去图鉴 →</span>
+                    </div>
+                </a>
+                <a href="enchantments.html" class="card-link">
+                    <div class="card mc-card">
+                        <div class="card-icon">✨</div>
+                        <h3>附魔与药水</h3>
+                        <p>35+ 种附魔效果、17 种药水配方，打造最强装备。</p>
+                        <span class="card-more">去查询 →</span>
+                    </div>
+                </a>
+                <a href="mods.html" class="card-link">
+                    <div class="card mc-card">
+                        <div class="card-icon">🧩</div>
+                        <h3>Mod 百科</h3>
+                        <p>40+ 款热门 Mod，含优化、辅助、内容、服务器全分类。</p>
+                        <span class="card-more">去浏览 →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">🔍 快速搜索</h2>
+            <div class="quick-search">
+                <input type="text" id="quick-input" class="wiki-search" placeholder="输入物品/生物/Mod名称，直接跳到对应百科..." style="width:100%;max-width:520px;padding:14px 20px;border:2px solid var(--mc-border);border-radius:8px;font-size:1rem;display:block;margin:0 auto;">
+                <div style="text-align:center;margin-top:12px;color:var(--mc-text-dim);font-size:0.85rem;">提示：输入后按回车</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 快速搜索：跳到对应百科页
+        document.getElementById('quick-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const q = this.value.trim();
+                if (!q) return;
+                const target = q.length <= 1 ? 'items' : 'items';
+                window.location.href = 'items.html?q=' + encodeURIComponent(q);
+            }
+        });
+    </script>
+</body>
+</html>
