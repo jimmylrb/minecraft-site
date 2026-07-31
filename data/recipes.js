@@ -37,7 +37,7 @@ window.MC_RECIPES = [
     { output: '红石中继器', icon: '⏭️', desc: '2 红石火把 + 1 红石粉 + 3 石头。', grid: [[null,'🔴',null],['🪨','🔴','🪨'],['🪨','🪨','🪨']] },
     { output: '红石比较器', icon: '⚖️', desc: '3 红石火把 + 1 红石粉 + 3 石头 + 1 石英。', grid: [[null,'🔴',null],['🪨','⚪','🪨'],['🪨','🪨','🪨']] },
     { output: '酿造台', icon: '⚗️', desc: '1 烈焰棒 + 3 圆石 → 1 酿造台。', grid: [[null,'🔥',null],['🪨','🪨','🪨'],[null,'🪨',null]] },
-    { output: '金苹果', icon: '🍏', desc: '1 苹果 + 8 金锭 → 1 金苹果。', grid: [['🟨','🟨','🟨'],['🟨','🍎','🟨'],['🟨','🟨','🟨']] },
+    { output: '金苹果', icon: '🍏', desc: '1 苹果 + 8 金锭 → 1 金苹果。', grid: [['🟡','🟡','🟡'],['🟡','🍎','🟡'],['🟡','🟡','🟡']] },
     { output: '蛋糕', icon: '🎂', desc: '3 小麦 + 2 糖 + 1 鸡蛋 + 3 牛奶。', grid: [['🌾','🌾','🌾'],['🥛','🥚','🥛'],['🍚','🍚','🍚']] },
     { output: '南瓜灯', icon: '🎃', desc: '1 南瓜 + 1 火把 → 1 南瓜灯。', grid: [[null,null,null],[null,'🎃',null],[null,'🔥',null]] },
     { output: '剪刀', icon: '✂️', desc: '2 铁锭 → 1 剪刀。', grid: [[null,'🔩',null],[null,null,'🔩'],[null,null,null]] },
