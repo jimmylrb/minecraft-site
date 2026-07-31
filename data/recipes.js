@@ -1,0 +1,47 @@
+/**
+ * 方块大陆百科 — 合成配方数据库
+ * grid: 3x3 数组，用物品图标表示（null 为空）
+ */
+
+window.MC_RECIPES = [
+    { output: '工作台', icon: '🛠️', desc: '4 木板 → 1 工作台。一切合成的起点！', grid: [['🟫','🟫',null],['🟫','🟫',null],[null,null,null]] },
+    { output: '木棍', icon: '🥢', desc: '2 木板 → 4 木棍。工具的基础材料。', grid: [['🟫',null,null],['🟫',null,null],[null,null,null]] },
+    { output: '火把', icon: '🔥', desc: '1 煤炭 + 1 木棍 → 4 火把。夜晚的救星。', grid: [[null,null,null],[null,'⚫',null],[null,'🥢',null]] },
+    { output: '熔炉', icon: '🔥', desc: '8 圆石 → 1 熔炉。烧制一切的核心。', grid: [['🪨','🪨','🪨'],['🪨',null,'🪨'],['🪨','🪨','🪨']] },
+    { output: '箱子', icon: '📦', desc: '8 木板 → 1 箱子（27格）。', grid: [['🟫','🟫','🟫'],['🟫',null,'🟫'],['🟫','🟫','🟫']] },
+    { output: '床', icon: '🛏️', desc: '3 羊毛 + 3 木板 → 1 床。睡觉过夜，设置重生点。', grid: [['⬜','⬜','⬜'],['🟫','🟫','🟫'],[null,null,null]] },
+    { output: '木镐', icon: '⛏️', desc: '3 木板 + 2 木棍 → 1 木镐。第一件工具。', grid: [['🟫','🟫','🟫'],[null,'🥢',null],[null,'🥢',null]] },
+    { output: '石镐', icon: '⛏️', desc: '3 圆石 + 2 木棍 → 1 石镐。', grid: [['🪨','🪨','🪨'],[null,'🥢',null],[null,'🥢',null]] },
+    { output: '铁镐', icon: '⛏️', desc: '3 铁锭 + 2 木棍 → 1 铁镐。挖钻石必需。', grid: [['🔩','🔩','🔩'],[null,'🥢',null],[null,'🥢',null]] },
+    { output: '钻石镐', icon: '⛏️', desc: '3 钻石 + 2 木棍 → 1 钻石镐。挖黑曜石。', grid: [['💎','💎','💎'],[null,'🥢',null],[null,'🥢',null]] },
+    { output: '木剑', icon: '🗡️', desc: '2 木板 + 1 木棍 → 1 木剑。', grid: [[null,'🟫',null],[null,'🟫',null],[null,'🥢',null]] },
+    { output: '铁剑', icon: '🗡️', desc: '2 铁锭 + 1 木棍 → 1 铁剑。', grid: [[null,'🔩',null],[null,'🔩',null],[null,'🥢',null]] },
+    { output: '钻石剑', icon: '💎', desc: '2 钻石 + 1 木棍 → 1 钻石剑。', grid: [[null,'💎',null],[null,'💎',null],[null,'🥢',null]] },
+    { output: '弓', icon: '🏹', desc: '3 木棍 + 3 线 → 1 弓。', grid: [[null,'🥢','🧵'],['🥢',null,'🧵'],[null,'🥢','🧵']] },
+    { output: '箭', icon: '🏹', desc: '1 燧石 + 1 木棍 + 1 羽毛 → 4 箭。', grid: [[null,'🪨','🪶'],[null,'🥢',null],[null,'🪶',null]] },
+    { output: '盾牌', icon: '🛡️', desc: '1 铁锭 + 6 木板 → 1 盾牌。', grid: [['🟫','🔩','🟫'],['🟫','🟫','🟫'],[null,'🟫',null]] },
+    { output: '铁桶', icon: '🪣', desc: '3 铁锭 → 1 桶。装水/岩浆。', grid: [[null,'🔩',null],[null,'🔩',null],[null,'🔩',null]] },
+    { output: '钓鱼竿', icon: '🎣', desc: '3 木棍 + 2 线 → 1 钓鱼竿。', grid: [[null,null,'🥢'],[null,'🥢','🧵'],['🥢',null,'🧵']] },
+    { output: '指南针', icon: '🧭', desc: '4 铁锭 + 1 红石粉 → 1 指南针。', grid: [[null,'🔩',null],['🔩','🔴','🔩'],[null,'🔩',null]] },
+    { output: '铁靴子', icon: '👢', desc: '4 铁锭 → 1 铁靴子。', grid: [['🔩',null,'🔩'],['🔩',null,'🔩'],[null,null,null]] },
+    { output: '铁头盔', icon: '🪖', desc: '5 铁锭 → 1 铁头盔。', grid: [['🔩','🔩','🔩'],['🔩',null,'🔩'],[null,null,null]] },
+    { output: '铁胸甲', icon: '👕', desc: '8 铁锭 → 1 铁胸甲。', grid: [['🔩',null,'🔩'],['🔩','🔩','🔩'],['🔩','🔩','🔩']] },
+    { output: '铁护腿', icon: '👖', desc: '7 铁锭 → 1 铁护腿。', grid: [['🔩','🔩','🔩'],['🔩',null,'🔩'],['🔩',null,'🔩']] },
+    { output: '末影之眼', icon: '👁️', desc: '1 末影珍珠 + 1 烈焰粉 → 1 末影之眼。', grid: [[null,'🟢',null],[null,'🧂',null],[null,null,null]] },
+    { output: '末影箱', icon: '🟣', desc: '8 黑曜石 + 1 末影之眼 → 1 末影箱。', grid: [['🟣','🟣','🟣'],['🟣','👁️','🟣'],['🟣','🟣','🟣']] },
+    { output: '附魔台', icon: '🔮', desc: '2 钻石 + 4 黑曜石 + 1 书 → 1 附魔台。', grid: [[null,'💎',null],['🟣','📕','🟣'],['🟣','🟣','🟣']] },
+    { output: '书架', icon: '📚', desc: '6 木板 + 3 书 → 1 书架。', grid: [['🟫','📕','🟫'],['🟫','📕','🟫'],['🟫','📕','🟫']] },
+    { output: 'TNT', icon: '💣', desc: '5 火药 + 4 沙子 → 1 TNT。', grid: [['🧨','🧨','🧨'],['🟨','🧨','🟨'],['🧨','🧨','🧨']] },
+    { output: '活塞', icon: '⬜', desc: '3 木板 + 4 圆石 + 1 铁锭 + 1 红石粉。', grid: [['🟫','🟫','🟫'],['🪨','🔩','🪨'],['🪨','🔴','🪨']] },
+    { output: '漏斗', icon: '🔻', desc: '5 铁锭 + 1 箱子 → 1 漏斗。', grid: [['🔩',null,'🔩'],['🔩','📦','🔩'],[null,'🔩',null]] },
+    { output: '红石中继器', icon: '⏭️', desc: '2 红石火把 + 1 红石粉 + 3 石头。', grid: [[null,'🔴',null],['🪨','🔴','🪨'],['🪨','🪨','🪨']] },
+    { output: '红石比较器', icon: '⚖️', desc: '3 红石火把 + 1 红石粉 + 3 石头 + 1 石英。', grid: [[null,'🔴',null],['🪨','⚪','🪨'],['🪨','🪨','🪨']] },
+    { output: '酿造台', icon: '⚗️', desc: '1 烈焰棒 + 3 圆石 → 1 酿造台。', grid: [[null,'🔥',null],['🪨','🪨','🪨'],[null,'🪨',null]] },
+    { output: '金苹果', icon: '🍏', desc: '1 苹果 + 8 金锭 → 1 金苹果。', grid: [['🟨','🟨','🟨'],['🟨','🍎','🟨'],['🟨','🟨','🟨']] },
+    { output: '蛋糕', icon: '🎂', desc: '3 小麦 + 2 糖 + 1 鸡蛋 + 3 牛奶。', grid: [['🌾','🌾','🌾'],['🥛','🥚','🥛'],['🍚','🍚','🍚']] },
+    { output: '南瓜灯', icon: '🎃', desc: '1 南瓜 + 1 火把 → 1 南瓜灯。', grid: [[null,null,null],[null,'🎃',null],[null,'🔥',null]] },
+    { output: '剪刀', icon: '✂️', desc: '2 铁锭 → 1 剪刀。', grid: [[null,'🔩',null],[null,null,'🔩'],[null,null,null]] },
+    { output: '打火石', icon: '🔥', desc: '1 铁锭 + 1 燧石 → 1 打火石。', grid: [[null,null,null],[null,'🪨',null],[null,'🔩',null]] },
+    { output: '玻璃', icon: '🪟', desc: '熔炉烧沙子。1 沙子 → 1 玻璃。', grid: [['🍳',null,null],[null,null,null],[null,null,null]] },
+    { output: '红石灯', icon: '💡', desc: '4 红石粉 + 1 萤石 → 1 红石灯。', grid: [[null,'🔴',null],['🔴','🟡','🔴'],[null,'🔴',null]] }
+];
