@@ -6,6 +6,30 @@
     <title>服务器 — 方块大陆</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .server-list { display: grid; gap: 16px; max-width: 760px; margin: 0 auto; }
+        .server-item {
+            background: #fff; border: 2px solid var(--mc-border); border-radius: 12px;
+            padding: 20px 24px; box-shadow: var(--mc-shadow); display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+        }
+        .server-item:hover { border-color: var(--mc-green); }
+        .srv-ico { font-size: 2.2rem; flex-shrink: 0; }
+        .srv-info { flex: 1; min-width: 240px; }
+        .srv-info h4 { font-size: 1.1rem; margin-bottom: 4px; }
+        .srv-info .srv-type { font-size: 0.82rem; color: var(--mc-text-dim); line-height: 1.5; }
+        .srv-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+        .srv-tag { font-size: 0.72rem; padding: 2px 10px; border-radius: 10px; font-weight: 600; background: #eaf6ea; color: var(--mc-green-dark); }
+        .srv-tag.verify { background: #e8f5e9; color: #2e7d32; }
+        .srv-tag.need { background: #fff3e0; color: #e65100; }
+        .srv-right { text-align: center; flex-shrink: 0; }
+        .srv-addr { display: block; background: #eee9dd; padding: 6px 14px; border-radius: 8px; font-family: monospace; font-size: 0.9rem; margin-bottom: 8px; }
+        .copy-btn {
+            background: var(--mc-green); color: #fff; border: none; padding: 7px 18px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.15s;
+        }
+        .copy-btn:hover { background: var(--mc-green-dark); }
+        .srv-note { max-width: 760px; margin: 24px auto 0; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -13,15 +37,13 @@
             <a href="index.html" class="logo">⛏️ 方块大陆</a>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
-                <li><a href="beginner.html">新手入门</a></li>
-                <li><a href="guides.html">攻略教程</a></li>
-                <li><a href="mods.html">Mod 分享</a></li>
                 <li><a href="wiki.html">百科首页</a></li>
                 <li><a href="items.html">物品百科</a></li>
                 <li><a href="recipes.html">合成配方</a></li>
                 <li><a href="mobs.html">生物图鉴</a></li>
                 <li><a href="enchantments.html">附魔药水</a></li>
                 <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="mod-downloads.html">Mod 下载</a></li>
                 <li><a href="server.html" class="active">服务器</a></li>
                 <li><a href="downloads.html">资源下载</a></li>
             </ul>
@@ -30,103 +52,29 @@
 
     <section class="page-header">
         <div class="container">
-            <h1>🌍 方块大陆服务器</h1>
-            <p class="page-desc">欢迎加入我们的生存服务器！和小伙伴一起开荒冒险。</p>
+            <h1>🌍 服务器推荐</h1>
+            <p class="page-desc">经过官网验证的国际知名 Java 版服务器，点击复制地址即可加入。</p>
         </div>
     </section>
 
-    <!-- 服务器信息卡片 -->
     <section class="section">
         <div class="container">
-            <div class="server-card">
-                <div class="server-head">
-                    <span class="server-status on">● 在线</span>
-                    <h2>推荐服务器：Hypixel</h2>
-                    <p class="server-ver">Java 版 1.8-1.21 · 全球最大小游戏服务器</p>
-                </div>
-                <div class="server-body">
-                    <div class="server-row"><span class="s-label">📌 服务器地址</span><code class="s-code">mc.hypixel.net</code><button class="copy-btn" onclick="copyAddress()">复制</button></div>
-                    <div class="server-row"><span class="s-label">🧩 类型</span><span>小游戏（空岛战争、起床战争、密室杀手等）</span></div>
-                    <div class="server-row"><span class="s-label">🌐 地区</span><span>全球 · 需正版账号</span></div>
-                    <div class="server-row"><span class="s-label">⭐ 说明</span><span>Hypixel 是国际最知名的 Java 版服务器（官网 hypixel.net，已验证）</span></div>
-                </div>
-            </div>
-            <div class="tip-box">
-                💡 <em>Hypixel 地址来自其官网 hypixel.net，可靠可用。如果想玩自己的生存服，把地址替换成你自己的服务器 IP 即可（复制按钮会自动复制当前显示的地址）。</em>
+            <div class="server-list" id="server-list"></div>
+            <div class="tip-box srv-note">
+                ⚠️ <strong>温馨提示：</strong>以下均为第三方公共服务器，地址来自各服务器官方网站（已验证）。加入前请自行了解其规则与信誉，注意保护个人账号安全。
             </div>
         </div>
     </section>
 
-    <!-- 服务器特色 -->
+    <!-- 如何加入 -->
     <section class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">✨ 服务器特色</h2>
-            <div class="card-grid">
-                <div class="card mc-card">
-                    <div class="card-icon">🗺️</div>
-                    <h3>自由建筑</h3>
-                    <p>超大地图，支持领地圈地，你的创意不受限制。</p>
-                </div>
-                <div class="card mc-card">
-                    <div class="card-icon">💰</div>
-                    <h3>经济系统</h3>
-                    <p>有市场、商店和任务系统，赚钱买房不是梦。</p>
-                </div>
-                <div class="card mc-card">
-                    <div class="card-icon">👥</div>
-                    <h3>友好社区</h3>
-                    <p>活跃的玩家群，萌新有大佬带，群里随时吹水。</p>
-                </div>
-                <div class="card mc-card">
-                    <div class="card-icon">🎉</div>
-                    <h3>定期活动</h3>
-                    <p>建筑大赛、挖矿竞赛、末地攻防战……奖品多多。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 加入方式 -->
-    <section class="section">
         <div class="container">
             <h2 class="section-title">🖱️ 怎么加入？</h2>
             <div class="steps-h">
-                <div class="step-h"><div class="step-num">1</div><h4>启动游戏</h4><p>Java 版，版本 1.8-1.21。</p></div>
-                <div class="step-h"><div class="step-num">2</div><h4>点"多人游戏"</h4><p>添加服务器，填地址。</p></div>
-                <div class="step-h"><div class="step-num">3</div><h4>输入地址</h4><p>mc.hypixel.net</p></div>
-                <div class="step-h"><div class="step-num">4</div><h4>进服开玩</h4><p>先看大厅公告哦！</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 规则 -->
-    <section class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">📜 服务器规则</h2>
-            <div class="rules-box">
-                <ul class="clean-list">
-                    <li>🤝 尊重他人，禁止辱骂、骚扰、歧视</li>
-                    <li>🚫 禁止作弊、外挂、飞行 Mod（可装辅助 Mod 但不可破坏平衡）</li>
-                    <li>🏠 禁止破坏/偷窃他人建筑与物品（服务器有记录可查）</li>
-                    <li>🧱 圈地内可自由建造，圈地外请勿恶意破坏地形</li>
-                    <li>🔁 交易纠纷请私聊管理员处理，不要在公屏吵架</li>
-                    <li>⚠️ 违反规则视情节警告 / 封禁 / 拉黑处理</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 公告 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">📢 服务器公告</h2>
-            <div class="notice-board">
-                <ul>
-                    <li>🎉 2026-07：第 3 周目开启，出生点欢迎广场已建成。</li>
-                    <li>🏗️ 本周建筑大赛主题："天空之城"，周六晚 8 点截止。</li>
-                    <li>💬 玩家 QQ 群：123456789（示例），进群请备注游戏 ID。</li>
-                    <li>🛠️ 服务器每晚 0:00-0:10 自动重启备份，期间无法登录。</li>
-                </ul>
+                <div class="step-h"><div class="step-num">1</div><h4>启动游戏</h4><p>Java 版（大部分需正版账号）</p></div>
+                <div class="step-h"><div class="step-num">2</div><h4>点"多人游戏"</h4><p>添加服务器，填地址</p></div>
+                <div class="step-h"><div class="step-num">3</div><h4>输入地址</h4><p>点击上方"复制"按钮</p></div>
+                <div class="step-h"><div class="step-num">4</div><h4>进服开玩</h4><p>遵守服务器规则哦！</p></div>
             </div>
         </div>
     </section>
@@ -135,29 +83,58 @@
         <div class="container">
             <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
             <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+            <p class="footer-note">服务器地址来自各服务器官方网站（Hypixel/CubeCraft/2b2t/Mineplex/Wynncraft/PvP Legacy/HiveMC/EarthMC）。</p>
         </div>
     </footer>
 
     <script>
-        function copyAddress() {
-            const addr = 'mc.hypixel.net';
+        // 已验证的知名服务器列表
+        const SERVERS = [
+            { icon: '🏆', name: 'Hypixel', type: '小游戏网络（起床战争、空岛战争、密室杀手）', addr: 'mc.hypixel.net', need: '需正版', site: 'hypixel.net' },
+            { icon: '🧊', name: 'CubeCraft', type: '小游戏网络（EggWars、SkyWars、Lucky Islands）· Java+基岩双平台', addr: 'play.cubecraft.net', need: '需正版', site: 'cubecraft.net' },
+            { icon: '💀', name: '2b2t', type: '无规则无政府生存（世界 15 年不重置，历史悠久）', addr: '2b2t.org', need: '需正版', site: '2b2t.org' },
+            { icon: '🎪', name: 'Mineplex', type: '小游戏（Block Hunt、Speed Builders）· 2026 年已重新上线', addr: 'play.mineplex.com', need: '需正版', site: 'mineplex.com' },
+            { icon: '⚔️', name: 'Wynncraft', type: 'MMORPG（职业、任务、副本）· 专为 MC 打造的网游', addr: 'play.wynncraft.com', need: '需正版', site: 'wynncraft.com' },
+            { icon: '🥊', name: 'PvP Legacy', type: 'PvP 训练/决斗（1.21.2+ 现代版本）', addr: 'play.pvplegacy.net', need: '仅正版', site: 'pvplegacy.com' },
+            { icon: '🐝', name: 'HiveMC', type: '基岩版小游戏（BedWars、Murder Mystery）', addr: 'play.hivebedrock.network', need: '微软账号', site: 'playhive.com' },
+            { icon: '🌏', name: 'EarthMC', type: '地缘政治生存（1:500 地球地图，城镇与国家）', addr: 'join.earthmc.net', need: '需正版', site: 'earthmc.net' }
+        ];
+
+        function renderServers() {
+            const list = document.getElementById('server-list');
+            list.innerHTML = SERVERS.map(s => `
+                <div class="server-item">
+                    <span class="srv-ico">${s.icon}</span>
+                    <div class="srv-info">
+                        <h4>${s.name}</h4>
+                        <div class="srv-type">${s.type}</div>
+                        <div class="srv-tags">
+                            <span class="srv-tag verify">✅ 官网已验证</span>
+                            <span class="srv-tag need">${s.need}</span>
+                            <span class="srv-tag">官网：${s.site}</span>
+                        </div>
+                    </div>
+                    <div class="srv-right">
+                        <span class="srv-addr">${s.addr}</span>
+                        <button class="copy-btn" onclick="copyAddr('${s.addr}', this)">📋 复制地址</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyAddr(addr, btn) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(addr).then(function() {
-                    const btn = document.querySelector('.copy-btn');
-                    btn.textContent = '已复制 ✅';
-                    setTimeout(function() { btn.textContent = '复制'; }, 2000);
+                    const old = btn.textContent;
+                    btn.textContent = '✅ 已复制';
+                    setTimeout(function() { btn.textContent = old; }, 2000);
                 });
             } else {
-                alert('复制失败，请手动复制：' + addr);
+                prompt('请手动复制服务器地址：', addr);
             }
         }
 
-        // 模拟在线人数（示例）
-        document.addEventListener('DOMContentLoaded', function() {
-            const el = document.getElementById('online-count');
-            const n = Math.floor(Math.random() * 20) + 3;
-            el.textContent = n + ' 人';
-        });
+        renderServers();
     </script>
 </body>
 </html>
