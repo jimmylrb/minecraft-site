@@ -688,3 +688,40 @@ code {
     font-size: 0.9rem;
     font-weight: 600;
 }
+
+/* ---------- 首页真实数据统计 ---------- */
+.site-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: var(--mc-card);
+    border: 2px solid var(--mc-border);
+    border-radius: 12px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: var(--mc-shadow);
+    transition: all 0.15s;
+}
+
+.stat-item:hover { border-color: var(--mc-green); transform: translateY(-2px); }
+
+.stat-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--mc-green-dark);
+    line-height: 1.2;
+}
+
+.stat-label { display: block; font-size: 0.85rem; color: var(--mc-text-dim); margin-top: 4px; }
+
+.stat-link { display: inline-block; margin-top: 8px; font-size: 0.78rem; color: var(--mc-green-dark); font-weight: 700; text-decoration: none; }
+
+.stat-link:hover { text-decoration: underline; }
+
+.changelog li { font-size: 0.92rem; }
