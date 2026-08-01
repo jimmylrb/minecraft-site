@@ -98,13 +98,28 @@ body {
 
 /* ---------- Hero ---------- */
 .hero {
-    background: linear-gradient(180deg, #4a90d9 0%, #7ec8e3 100%);
-    padding: 70px 0 90px;
+    background: linear-gradient(180deg, #6db3f2 0%, #a5d8f0 55%, #8bc34a 55%, #6aa62e 100%);
+    padding: 70px 0 100px;
     text-align: center;
     color: #fff;
     position: relative;
     overflow: hidden;
 }
+
+/* 地面：真实草方块贴图平铺 */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 44px;
+    background-image: url('images/block_grass_block_top.png');
+    background-repeat: repeat-x;
+    background-size: 44px 44px;
+    image-rendering: pixelated;
+    opacity: 0.95;
+}
+
+.hero .container { position: relative; z-index: 1; }
 
 .hero h1 {
     font-size: 2.8rem;
@@ -172,16 +187,21 @@ body {
 }
 
 .block {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
-    background: rgba(0,0,0,0.18);
-    border: 2px solid rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.25);
+    border: 2px solid rgba(255,255,255,0.4);
     border-radius: 8px;
     animation: floaty 3s ease-in-out infinite;
+}
+
+.block img {
+    width: 44px;
+    height: 44px;
+    image-rendering: pixelated;
 }
 
 .block:nth-child(2) { animation-delay: 0.4s; }
@@ -261,6 +281,7 @@ body {
 }
 
 .fact-emoji { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+.fact-emoji img { width: 40px; height: 40px; image-rendering: pixelated; }
 .fact-card p { font-size: 0.9rem; color: var(--mc-text-dim); line-height: 1.6; }
 
 /* ---------- 公告栏 ---------- */
