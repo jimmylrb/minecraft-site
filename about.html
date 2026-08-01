@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 — 方块大陆</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-container { max-width: 700px; margin: 0 auto; }
+        .about-section { margin-bottom: 36px; }
+        .about-section h2 { font-size: 1.3rem; margin-bottom: 12px; text-align: left; }
+        .about-section p, .about-section li { font-size: 0.95rem; color: var(--mc-text-dim); line-height: 1.8; }
+        .about-section ul { padding-left: 20px; }
+        .creator-card {
+            background: #fff; border: 3px solid var(--mc-green); border-radius: 12px;
+            padding: 32px; box-shadow: var(--mc-shadow); text-align: center; max-width: 420px;
+            margin: 0 auto 36px;
+        }
+        .creator-avatar { font-size: 4.5rem; margin-bottom: 14px; }
+        .creator-card h2 { font-size: 1.4rem; margin-bottom: 4px; }
+        .creator-card .subtitle { color: var(--mc-text-dim); font-size: 0.9rem; margin-bottom: 14px; }
+        .creator-card .desc { font-size: 0.9rem; color: var(--mc-text-dim); line-height: 1.7; }
+        .about-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+        .about-links a {
+            background: var(--mc-green); color: #fff; text-decoration: none; padding: 10px 24px;
+            border-radius: 8px; font-size: 0.9rem; font-weight: 700; box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+            transition: all 0.15s;
+        }
+        .about-links a:hover { background: var(--mc-green-dark); transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">⛏️ 方块大陆</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="beginner.html">新手入门</a></li>
+                <li><a href="guides.html">攻略教程</a></li>
+                <li><a href="wiki.html">百科首页</a></li>
+                <li><a href="items.html">物品百科</a></li>
+                <li><a href="recipes.html">合成配方</a></li>
+                <li><a href="mobs.html">生物图鉴</a></li>
+                <li><a href="enchantments.html">附魔药水</a></li>
+                <li><a href="mods.html">Mod 百科</a></li>
+                <li><a href="mod-downloads.html">Mod 下载</a></li>
+                <li><a href="videos.html">视频专区</a></li>
+                <li><a href="server.html">服务器</a></li>
+                <li><a href="downloads.html">资源下载</a></li>
+                <li><a href="about.html">关于</a></li>
+                <li><a href="about.html" class="active">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📋 关于本站</h1>
+            <p class="page-desc">方块大陆的由来和背后的制作人。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="about-container">
+                <!-- 制作人 -->
+                <div class="creator-card">
+                    <div class="creator-avatar">👨‍💻</div>
+                    <h2>梁二伯</h2>
+                    <div class="subtitle">《我的世界》玩家 · 本站制作人</div>
+                    <p class="desc">
+                        一个热爱《我的世界》的玩家。制作这个网站的目的是为中文玩家提供一个好用、真实的 Minecraft 百科与资源导航。从攻略到 Mod，从贴图到服务器，希望这里能成为你的"方块大陆"入口。
+                    </p>
+                </div>
+
+                <!-- 项目介绍 -->
+                <div class="about-section">
+                    <h2>🎯 项目目的</h2>
+                    <p>
+                        《我的世界》中文资料分散，很多网站要么信息过时、要么广告满天飞。
+                        方块大陆希望做成一个<strong>干净、真实、数据驱动</strong>的百科站——所有物品、配方、生物、附魔数据都来自游戏原版资源，图片全部是 1:1 原版贴图。
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>📖 本站内容</h2>
+                    <ul>
+                        <li><strong>物品百科</strong> — 138 种物品，原版贴图 + 分类搜索</li>
+                        <li><strong>合成配方</strong> — 40 个可视化 3×3 配方</li>
+                        <li><strong>生物图鉴</strong> — 50 种生物，实体皮肤 1:1</li>
+                        <li><strong>附魔与药水</strong> — 35 种附魔 + 17 种药水</li>
+                        <li><strong>Mod 百科 & 下载</strong> — 60+ 款热门 Mod 直达正规平台</li>
+                        <li><strong>视频专区</strong> — B站优质 MC 内容入口</li>
+                        <li><strong>服务器推荐</strong> — 8 个已验证的国际知名服务器</li>
+                        <li><strong>新手入门 / 攻略教程</strong> — 从零开始的生存指南</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h2>🔒 版权声明</h2>
+                    <p>
+                        《我的世界》及其相关素材是 <strong>Mojang Studios</strong> 的商标与版权。
+                        本站为<strong>非官方玩家自制网站</strong>，与 Mojang / Microsoft 无关。
+                        站内贴图来自游戏原版资源（公开镜像），游戏截图来自 Wikimedia Commons，视频链接来自 B站，均已在页面注明来源。
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>🔗 链接</h2>
+                    <div class="about-links">
+                        <a href="https://github.com/jimmylrb/minecraft-site" target="_blank" rel="noopener">📦 GitHub 仓库</a>
+                        <a href="https://jimmylrb.github.io/minecraft-site/" target="_blank" rel="noopener">🌐 网站首页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⛏️ 方块大陆 · 我的世界玩家社区 · 非官方站点</p>
+            <p class="footer-note">《我的世界》是 Mojang Studios 的商标。本站为玩家自制内容站，与 Mojang / Microsoft 无关。</p>
+            <p class="footer-note">制作人：梁二伯</p>
+        </div>
+    </footer>
+</body>
+</html>
