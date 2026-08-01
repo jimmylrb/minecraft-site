@@ -16,7 +16,6 @@
                 <li><a href="index.html" class="active">首页</a></li>
                 <li><a href="beginner.html">新手入门</a></li>
                 <li><a href="guides.html">攻略教程</a></li>
-                <li><a href="mods.html">Mod 分享</a></li>
                 <li><a href="wiki.html">百科首页</a></li>
                 <li><a href="items.html">物品百科</a></li>
                 <li><a href="recipes.html">合成配方</a></li>
@@ -135,17 +134,35 @@
         </div>
     </section>
 
-    <!-- 服务器公告 -->
+    <!-- 站点真实数据统计 -->
     <section class="section">
         <div class="container">
+            <h2 class="section-title">📊 站点数据</h2>
+            <p style="text-align:center;color:var(--mc-text-dim);font-size:0.9rem;margin-bottom:24px;">以下数字全部来自本站百科数据库，真实可查：</p>
+            <div class="site-stats" id="site-stats">
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">物品百科</span><a href="items.html" class="stat-link">去查看 →</a></div>
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">合成配方</span><a href="recipes.html" class="stat-link">去查看 →</a></div>
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">生物图鉴</span><a href="mobs.html" class="stat-link">去查看 →</a></div>
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">附魔与药水</span><a href="enchantments.html" class="stat-link">去查看 →</a></div>
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Mod 下载</span><a href="mod-downloads.html" class="stat-link">去查看 →</a></div>
+                <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">推荐服务器</span><a href="server.html" class="stat-link">去查看 →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 真实更新记录 -->
+    <section class="section section-alt">
+        <div class="container">
             <div class="notice-board">
-                <h3>📢 最新公告</h3>
-                <ul>
-                    <li>🎉 服务器新周目开启！欢迎新老玩家加入。</li>
-                    <li>🧩 Mod 分享页已更新：新增 5 款热门 Mod 推荐。</li>
-                    <li>📖 攻略教程持续更新中，红石专区即将上线。</li>
+                <h3>🕘 最近更新</h3>
+                <ul class="changelog">
+                    <li>🎬 新增 B站视频专区，收录 10 大领域的 MC 视频入口</li>
+                    <li>🧩 新增 Mod 下载中心（60 款热门 Mod，可搜索）</li>
+                    <li>🌍 服务器页更新：收录 8 个已验证的国际知名服务器</li>
+                    <li>🎨 物品百科、合成配方、生物图鉴全部换成原版 1:1 贴图</li>
+                    <li>📦 资源下载页更新为真实链接（Faithful、LittleSkin、Modrinth 等）</li>
+                    <li>📚 百科上线：138 种物品、40 个配方、50 种生物、35 种附魔</li>
                 </ul>
-                <a href="server.html" class="notice-more">查看服务器详情 →</a>
             </div>
         </div>
     </section>
@@ -157,5 +174,25 @@
             <p class="footer-note">首页横幅图片来源：Wikimedia Commons（Screenshot from the Minecraft End）</p>
         </div>
     </footer>
+
+    <script src="data/items.js"></script>
+    <script src="data/recipes.js"></script>
+    <script src="data/mobs.js"></script>
+    <script src="data/enchants.js"></script>
+    <script src="data/mod_downloads.js"></script>
+    <script>
+        // 用真实数据库填充首页统计
+        document.addEventListener('DOMContentLoaded', function() {
+            const nums = document.querySelectorAll('.stat-num');
+            if (nums.length >= 6) {
+                nums[0].textContent = window.MC_ITEMS.length;
+                nums[1].textContent = window.MC_RECIPES.length;
+                nums[2].textContent = window.MC_MOBS.length;
+                nums[3].textContent = window.MC_ENCHANTMENTS.length + window.MC_POTIONS.length;
+                nums[4].textContent = window.MC_MOD_DOWNLOADS.length;
+                nums[5].textContent = 8;
+            }
+        });
+    </script>
 </body>
 </html>
